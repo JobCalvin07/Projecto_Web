@@ -1,0 +1,273 @@
+/* ===== Base ===== */
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary: rgb(150, 14, 14);
+    --primary-text: #e5484d;   /* versão mais clara para texto sobre fundo escuro (contraste) */
+    --secondary: #fff;
+    --third: #000;
+    --fourth: rgb(12, 5, 5);
+    --surface: #222;
+    --font: "Russo One", "Arial Black", Impact, sans-serif;
+}
+
+html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    font-family: var(--font);
+    background-color: #111;
+    color: var(--secondary);
+    line-height: 1.5;
+    min-height: 100vh;
+}
+
+button {
+    font-family: inherit;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+:focus-visible {
+    outline: 3px solid var(--secondary);
+    outline-offset: 3px;
+}
+
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+}
+
+/* ===== Cabeçalho ===== */
+.site-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px 20px;
+    padding: 20px;
+}
+
+.logo {
+    color: var(--primary-text);
+    font-size: clamp(1.5rem, 4vw, 2rem);
+    text-decoration: none;
+    text-shadow: 1px 6px 1px var(--fourth);
+}
+
+.main-nav {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 6px 18px;
+}
+
+.main-nav a {
+    color: var(--secondary);
+    text-decoration: none;
+    padding: 8px 4px;
+    border-bottom: 2px solid transparent;
+    transition: color 0.15s, border-color 0.15s;
+}
+
+.main-nav a:hover {
+    color: var(--primary-text);
+    border-color: var(--primary-text);
+}
+
+/* ===== Botões ===== */
+.btn-primary,
+.btn-secondary {
+    background-color: var(--primary);
+    color: var(--secondary);
+    border: 2px solid transparent;
+    border-radius: 25px;
+    font-weight: 400;
+    transition: background-color 0.15s, color 0.15s, transform 0.15s;
+}
+
+.btn-primary {
+    padding: 12px 25px;
+    min-height: 44px;
+}
+
+.btn-secondary {
+    padding: 18px clamp(32px, 10vw, 100px);
+    max-width: 100%;
+}
+
+.btn-primary:hover,
+.btn-secondary:hover {
+    background-color: var(--secondary);
+    color: var(--primary);
+    transform: scale(1.05);
+}
+
+/* ===== Hero ===== */
+main {
+    background-image:
+        linear-gradient(rgba(17, 17, 17, 0.55), rgba(17, 17, 17, 0.85)),
+        url(../imagens/comicwweb.jpeg);
+    background-color: #111;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.hero {
+    padding: clamp(48px, 12vw, 100px) 20px;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.subtitle {
+    font-size: clamp(2.5rem, 10vw, 4.4rem);
+    line-height: 1.1;
+    text-shadow: 1px 2px 2px #222;
+}
+
+.subtitle .accent {
+    color: var(--primary-text);
+}
+
+.hero p {
+    max-width: 38ch;
+    padding: 14px 0 22px;
+    font-size: clamp(1rem, 2.6vw, 1.15rem);
+}
+
+/* ===== Serviços ===== */
+.service {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+    gap: 20px;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.card {
+    --card-img: none;
+    background-color: var(--surface);
+    background-image: none;
+    background-size: cover;
+    background-position: center;
+    padding: 20px;
+    border-radius: 10px;
+    min-height: 180px;
+    transition: background-color 0.2s;
+}
+
+.card h3 {
+    color: var(--primary-text);
+    font-weight: 400;
+    margin-bottom: 8px;
+}
+
+.desenhada { --card-img: url(../imagens/spiderman.jpeg); }
+.manga     { --card-img: url(../imagens/dragon.jpeg); }
+.animes    { --card-img: url(../imagens/Itadori.jpeg); }
+.cartoon   { --card-img: url(../imagens/Bob.jfif); }
+
+/* Com rato: a imagem aparece ao passar por cima, mantendo o texto legível */
+@media (hover: hover) {
+    .card:hover {
+        background-image:
+            linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.75)),
+            var(--card-img);
+    }
+}
+
+/* Em ecrãs tácteis não existe hover: a imagem fica sempre visível, mais escura */
+@media (hover: none) {
+    .card {
+        background-image:
+            linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.85)),
+            var(--card-img);
+    }
+}
+
+/* ===== Rodapé ===== */
+.site-footer {
+    background-color: var(--third);
+    padding: 20px;
+}
+
+.social {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 10px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    font-size: 0.8rem;
+}
+
+.social li {
+    flex: 1 1 160px;
+}
+
+/* ===== Tablet / telemóvel ===== */
+@media (max-width: 768px) {
+    .site-header {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .hero {
+        text-align: center;
+    }
+
+    .hero p {
+        margin-inline: auto;
+    }
+
+    .social {
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .main-nav {
+        gap: 4px 12px;
+    }
+
+    .btn-primary,
+    .btn-secondary {
+        width: 100%;
+    }
+
+    .social li {
+        flex-basis: 100%;
+    }
+}
+
+/* ===== Acessibilidade: menos movimento ===== */
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    * {
+        transition: none !important;
+    }
+
+    .btn-primary:hover,
+    .btn-secondary:hover {
+        transform: none;
+    }
+}
